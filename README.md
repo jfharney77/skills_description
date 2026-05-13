@@ -362,6 +362,68 @@ Sets up a GitHub Actions CI/CD pipeline to deploy a FastAPI backend + React/Vite
 
 ---
 
+---
+
+## Windsurf Workflows
+
+Windsurf workflows found across local projects and global config. Sourced from `~/.codeium/windsurf/windsurf/workflows/` and project-level `.windsurf/workflows/` directories. Stored as `WORKFLOW.md` to distinguish from skills.
+
+---
+
+### review
+**Source:** `~/.codeium/windsurf/windsurf/workflows/review.md` (global)
+
+Senior software engineer code review workflow. Identical in scope to the `review` entry in Windsurf Skills — finds bugs, security issues, and code improvements in changed code. Reports only high-confidence findings.
+
+[→ Full workflow](saved_windsurf_workflows/review/WORKFLOW.md)
+
+---
+
+### railway-deployment
+**Source:** `~/github/windsurf_tutorials/.windsurf/workflows/railway-deployment.md`
+
+Deployment guide for a FastAPI + React/Vite monorepo to Railway using Dockerfiles. Covers service configuration, `VITE_API_BASE_URL` formatting requirements, common error patterns, and ordered deployment steps. See the [Windsurf Skills entry](#railway-deployment) for the full summary.
+
+[→ Full workflow](saved_windsurf_workflows/railway-deployment/WORKFLOW.md)
+
+---
+
+### gitlab-aws-ecs
+**Source:** `~/github/project_index/.windsurf/workflows/gitlab-aws-ecs.md`
+
+GitLab CI/CD → AWS ECS Express Mode deployment workflow. 15 hard-won lessons, full `.gitlab-ci.yml` template, IAM setup, and stuck-deployment recovery procedure. See the [Windsurf Skills entry](#gitlab-aws-ecs-1) for the full summary.
+
+[→ Full workflow](saved_windsurf_workflows/gitlab-aws-ecs/WORKFLOW.md)
+
+---
+
+### cerebras-setup
+**Source:** `~/github/project_index/.windsurf/workflows/cerebras-setup.md`
+
+Adds Cerebras AI API support to any LangChain/LangGraph Python project. Provider switch via `LLM_PROVIDER` env var, `build_llm()` helper, no overwriting of existing config. See the [Windsurf Skills entry](#cerebras-setup-1) for the full summary.
+
+[→ Full workflow](saved_windsurf_workflows/cerebras-setup/WORKFLOW.md)
+
+---
+
+### github-railway
+**Source:** `~/github/project_index/.windsurf/workflows/github-railway.md`
+
+GitHub Actions → Railway deployment workflow with full YAML template. 11 hard-won lessons including Railway CLI v4 OAuth auth, token expiry, and `VITE_API_URL` build-time baking. See the [Windsurf Skills entry](#github-railway-1) for the full summary.
+
+[→ Full workflow](saved_windsurf_workflows/github-railway/WORKFLOW.md)
+
+---
+
+### cerebras-setup-skill
+**Source:** `~/github/project_index/.windsurf/workflows/cerebras-setup/SKILL.md`
+
+A Claude-style `SKILL.md` version of the Cerebras setup workflow, stored inside the Windsurf workflows directory. Content is equivalent to the Claude [`cerebras-setup`](#cerebras-setup) skill.
+
+[→ Full workflow](saved_windsurf_workflows/cerebras-setup-skill/WORKFLOW.md)
+
+---
+
 ## Project Structure
 
 ```text
@@ -388,6 +450,14 @@ saved_windsurf_skills/
   gitlab-aws-ecs/SKILL.md
   cerebras-setup/SKILL.md
   github-railway/SKILL.md
+
+saved_windsurf_workflows/
+  review/WORKFLOW.md
+  railway-deployment/WORKFLOW.md
+  gitlab-aws-ecs/WORKFLOW.md
+  cerebras-setup/WORKFLOW.md
+  github-railway/WORKFLOW.md
+  cerebras-setup-skill/WORKFLOW.md
 ```
 
 ## How To Use This Repository
