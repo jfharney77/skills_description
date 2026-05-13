@@ -424,6 +424,62 @@ A Claude-style `SKILL.md` version of the Cerebras setup workflow, stored inside 
 
 ---
 
+## Windsurf Rules
+
+Windsurf rules found across local projects and global config. Sourced from `~/.codeium/windsurf/memories/` (global) and project-level `.windsurf/rules/` directories. Stored as `RULE.md`.
+
+---
+
+### global_rules
+**Source:** `~/.codeium/windsurf/memories/global_rules.md` (global)
+
+Global rules file — currently empty.
+
+[→ Full rule](saved_windsurf_rules/global_rules/RULE.md)
+
+---
+
+### backend_logging
+**Source:** `~/github/token_center/.windsurf/rules/backend_logging.md`
+
+Enforces file-based logging for all backend application logs.
+
+**Rules:**
+- All logs must be written to text files (not stdout only)
+- Include ISO-format timestamps in every log entry
+- Create a dedicated `logs/` directory; create it if it doesn't exist
+- Use descriptive file names (`app.log`, `error.log`, etc.)
+- Append to log files — never overwrite
+- Include relevant context in messages (request ID, user ID, etc.)
+
+[→ Full rule](saved_windsurf_rules/backend_logging/RULE.md)
+
+---
+
+### planning
+**Source:** `~/github/token_center/.windsurf/rules/planning.md`  
+**Trigger:** `always_on`
+
+When asked to create a plan, write it to a markdown file in the project directory (e.g. `PLAN.md` at the root) rather than outputting it only in the Cascade panel.
+
+[→ Full rule](saved_windsurf_rules/planning/RULE.md)
+
+---
+
+### tech_stack
+**Source:** `~/github/token_center/.windsurf/rules/tech_stack.md`  
+**Trigger:** `always_on`
+
+Enforces a consistent web application tech stack. When building a web app, always use:
+- **Backend:** FastAPI (Python)
+- **Frontend:** React (TypeScript)
+
+Do not suggest Flask, Django, Express, Vue, or other alternatives unless explicitly asked.
+
+[→ Full rule](saved_windsurf_rules/tech_stack/RULE.md)
+
+---
+
 ## Project Structure
 
 ```text
@@ -458,6 +514,12 @@ saved_windsurf_workflows/
   cerebras-setup/WORKFLOW.md
   github-railway/WORKFLOW.md
   cerebras-setup-skill/WORKFLOW.md
+
+saved_windsurf_rules/
+  global_rules/RULE.md
+  backend_logging/RULE.md
+  planning/RULE.md
+  tech_stack/RULE.md
 ```
 
 ## How To Use This Repository
