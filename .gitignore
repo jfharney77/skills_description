@@ -1,0 +1,13 @@
+# Credential files — never commit these
+mcp_config.json
+mcp_config.json-base
+.env
+.env.*
+!.env.example
+*.credentials.json
+secrets.json
+config.json
+
+# OS
+.DS_Store
+Thumbs.db
