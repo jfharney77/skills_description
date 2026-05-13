@@ -252,6 +252,116 @@ Audits current state first and reports what is already in place before making ch
 
 ---
 
+---
+
+## Windsurf Skills
+
+Windsurf skills and workflows found across local projects and global config. Sourced from `~/.codeium/windsurf/windsurf/workflows/` and project-level `.windsurf/` directories.
+
+---
+
+### review
+**Source:** `~/.codeium/windsurf/windsurf/workflows/review.md` (global)
+
+A code review workflow for identifying bugs, security issues, and improvements in code changes.
+
+**Focus areas:**
+- Logic errors, edge cases, null/undefined references
+- Race conditions and concurrency issues
+- Security vulnerabilities
+- Resource leaks and improper resource management
+- API contract violations and incorrect caching behavior
+- Violations of existing code patterns or conventions
+
+Only reports high-confidence findings based on complete codebase understanding — no speculative issues.
+
+[→ Full skill](saved_windsurf_skills/review/SKILL.md)
+
+---
+
+### railway-deployment
+**Source:** `~/github/windsurf_tutorials/.windsurf/workflows/railway-deployment.md`
+
+Step-by-step guide for deploying a FastAPI backend + React/Vite frontend monorepo to Railway using Dockerfiles.
+
+**What it covers:**
+- Service configuration: backend on port 8080 (Python 3.12 + uvicorn), frontend on port 3000 (Node 22 + Vite + serve)
+- `VITE_API_BASE_URL` must include `https://` prefix and `/api` suffix, and requires a manual redeploy after being set (baked at build time)
+- Common issues: Node.js version errors (use `node:22-alpine`), frontend receiving HTML instead of JSON (missing `/api` suffix), 404s on API endpoints
+- Ordered deployment steps: backend first → get URL → set frontend env var → deploy frontend
+
+[→ Full skill](saved_windsurf_skills/railway-deployment/SKILL.md)
+
+---
+
+### fix-cors-errors
+**Source:** `~/github/windsurf_tutorials/.windsurf/skills/fix-cors-errors.md`
+
+How to diagnose and fix CORS (Cross-Origin Resource Sharing) errors in web applications.
+
+**Covers:**
+- **FastAPI**: `CORSMiddleware` with `allow_origins`, `allow_credentials`, `allow_methods`, `allow_headers`
+- **Express (Node.js)**: `cors` npm package configuration
+- **Flask**: `flask-cors` configuration
+- Common pitfalls: browser preview ports requiring `allow_origins=["*"]` in dev, credentials requiring explicit origins (no wildcards), backend restart required after config changes
+- Debugging checklist: console errors, backend accessibility, API URL match, Vite proxy config
+
+[→ Full skill](saved_windsurf_skills/fix-cors-errors/SKILL.md)
+
+---
+
+### gitlab-aws-ecs
+**Source:** `~/github/project_index/.windsurf/workflows/gitlab-aws-ecs.md`
+
+Sets up a GitLab CI/CD pipeline to deploy a FastAPI backend + React/Vite frontend monorepo to AWS ECS Express Mode via ECR. More detailed than the Claude equivalent — includes full `.gitlab-ci.yml` templates and recovery procedures.
+
+**Key hard-won lessons (15 total):**
+- App Runner deprecated April 2026 → use ECS Express Mode
+- Alpine musl breaks Python 3.12 pyexpat — use `python:3.12-slim`
+- `amazon/aws-cli` image requires `entrypoint: [""]`
+- Never mix standard ECS API with Express Mode API — causes undrainable zombie deployments; only fix is delete + recreate
+- `serve` requires `tcp://0.0.0.0:PORT` form and explicit `WORKDIR`
+- Supabase direct connection is IPv6-only — use session pooler URL for ECS
+- Stuck deployment recovery procedure included
+
+[→ Full skill](saved_windsurf_skills/gitlab-aws-ecs/SKILL.md)
+
+---
+
+### cerebras-setup
+**Source:** `~/github/project_index/.windsurf/workflows/cerebras-setup.md`
+
+Adds Cerebras AI API support alongside existing Ollama/OpenAI config in any LangChain/LangGraph Python project. Windsurf-flavored version of the Claude `cerebras-setup` skill.
+
+**What it does:**
+- Adds `LLM_PROVIDER`, `CEREBRAS_API_KEY`, `CEREBRAS_MODEL` to `.env` and `.env.example` without overwriting existing values
+- Creates or updates `llm.py` with a `build_llm()` provider switch (ollama ↔ cerebras)
+- Updates agent files to use `build_llm()` instead of direct instantiation
+- Adds `langchain-openai` to `requirements.txt`
+- Prints a summary with activation instructions
+
+[→ Full skill](saved_windsurf_skills/cerebras-setup/SKILL.md)
+
+---
+
+### github-railway
+**Source:** `~/github/project_index/.windsurf/workflows/github-railway.md`
+
+Sets up a GitHub Actions CI/CD pipeline to deploy a FastAPI backend + React/Vite frontend monorepo to Railway. Windsurf-flavored version of the Claude `github-railway` skill, with a full workflow YAML template included.
+
+**Key hard-won lessons (11 total):**
+- `RAILWAY_TOKEN` does not work with CLI v4 — write `~/.railway/config.json` directly
+- `projects` section must be populated with real UUIDs (empty `{}` → "No linked project")
+- OAuth tokens expire ~daily — refresh via `railway login` and update GitHub secrets
+- `railway up` must run from repo root
+- Use `ubuntu-latest` — Alpine/musl crashes the CLI
+- `VITE_API_URL` baked at build time — requires full rebuild after change
+- Deploy jobs gated on `github.event_name == 'push'` so PRs don't deploy
+
+[→ Full skill](saved_windsurf_skills/github-railway/SKILL.md)
+
+---
+
 ## Project Structure
 
 ```text
@@ -270,6 +380,14 @@ saved_skills/
   security-https-bruteforce/SKILL.md
   security-web-vulns/SKILL.md
   simple-auth/SKILL.md
+
+saved_windsurf_skills/
+  review/SKILL.md
+  railway-deployment/SKILL.md
+  fix-cors-errors/SKILL.md
+  gitlab-aws-ecs/SKILL.md
+  cerebras-setup/SKILL.md
+  github-railway/SKILL.md
 ```
 
 ## How To Use This Repository
