@@ -480,6 +480,75 @@ Do not suggest Flask, Django, Express, Vue, or other alternatives unless explici
 
 ---
 
+## Windsurf Plans
+
+App development plans written by Windsurf Cascade, stored in `~/.windsurf/plans/`. Stored as `PLAN.md`.
+
+---
+
+### echo-app
+**Source:** `~/.windsurf/plans/echo-app-railway-ready-3f28c1.md`
+
+Plan for a simple FastAPI + React (TypeScript) echo web app with file-based logging and Railway deployment preparation.
+
+**What it builds:**
+- FastAPI backend with a `POST /echo` endpoint that logs each request to `logs/echo.log` (ISO timestamps, per `backend_logging` rule)
+- React frontend with a text input, submit button, and response display area
+- Executable `run-backend.sh` and `run-frontend.sh` scripts (from project skills)
+- Railway-ready backend: `railway.toml`, `requirements.txt`, `.env.example`, `/health` endpoint, CORS via env var
+- Backend on port 8000, frontend on port 5173
+
+[→ Full plan](saved_windsurf_plans/echo-app/PLAN.md)
+
+---
+
+### influencer-tracking-app
+**Source:** `~/.windsurf/plans/influencer-tracking-app-88baf9.md`
+
+Plan for a FastAPI + React app that displays news summaries and tweets for three influencers (Obama, Musk, Cuban) with sentiment analysis badges.
+
+**What it builds:**
+- SQLite database (SQLAlchemy) with `influencers`, `news`, and `tweets` tables
+- Sentiment analysis via TextBlob (positive/neutral/negative, scored and labeled)
+- REST API: `GET /api/influencers`, `/api/influencers/{id}/news`, `/api/influencers/{id}/tweets`, `POST /api/refresh-data`
+- React frontend with an influencer dropdown, two-column layout (news panel + Twitter feed), color-coded sentiment badges
+- Mock data: 10–15 news articles and 20–30 tweets per influencer
+
+[→ Full plan](saved_windsurf_plans/influencer-tracking-app/PLAN.md)
+
+---
+
+### project-index-app
+**Source:** `~/.windsurf/plans/project-index-app-0b176e.md`
+
+Plan for a React + FastAPI dashboard that scans local git repos, generates AI summaries via Ollama, and persists results in a JSON file.
+
+**What it builds:**
+- FastAPI backend with `POST /projects`, `GET /projects`, `GET /projects/{id}`, `DELETE /projects/{id}`, `POST /projects/{id}/refresh`
+- Repo analyzer: validates git repo, counts LOC by language, extracts metadata (last commit, branch, size), reads README
+- Ollama integration: sends repo metadata + README to local model, returns summary and run instructions
+- JSON persistence at `data/projects.json`
+- React (Vite + TypeScript) frontend with TailwindCSS + shadcn/ui: dashboard grid, add-project dialog, project detail view with language breakdown
+
+[→ Full plan](saved_windsurf_plans/project-index-app/PLAN.md)
+
+---
+
+### word-to-latex
+**Source:** `~/.windsurf/plans/word-to-latex-plan-8411e2.md`
+
+Plan for a docx-to-LaTeX CLI pipeline plus a FastAPI + React document viewer, built on top of an existing `research_papers` repository.
+
+**What it builds:**
+- CLI (`typer`/`click`) that accepts `--docx` and `--template` args; parses Word headings/figures/references; renders LaTeX via Jinja templates per venue (IEEE, ACM, NeurIPS, AAAI); optionally compiles to PDF
+- FastAPI backend (`src/docserve`): upload endpoint, document CRUD, section/PDF/Word streaming endpoints, background compilation tasks
+- React frontend (Vite + TypeScript): library view, document workspace with PDF preview (`react-pdf`), LaTeX viewer/editor, Word preview, drag-and-drop upload flow
+- JSON manifest per document for section tree, assets, and build status
+
+[→ Full plan](saved_windsurf_plans/word-to-latex/PLAN.md)
+
+---
+
 ## Project Structure
 
 ```text
@@ -520,6 +589,12 @@ saved_windsurf_rules/
   backend_logging/RULE.md
   planning/RULE.md
   tech_stack/RULE.md
+
+saved_windsurf_plans/
+  echo-app/PLAN.md
+  influencer-tracking-app/PLAN.md
+  project-index-app/PLAN.md
+  word-to-latex/PLAN.md
 ```
 
 ## How To Use This Repository
